@@ -1,0 +1,4 @@
+numpy
+
+#An older version to ensure compatibility
+pyglet==1.4.7
