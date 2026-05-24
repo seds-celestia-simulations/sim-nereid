@@ -46,7 +46,7 @@ The project is engineered to balance physical accuracy with computational perfor
 ## Installation
 
 > [!WARNING]
-> **Pyglet Compatibility Note:** This simulation relies on specific window management APIs that may not becompatible with the latest versions of `pyglet`. If you encounter launch or display issues, please isolate the project inside a virtual environment using the versions provided in `requirements.txt`.
+> **Pyglet Compatibility Note:** This simulation relies on specific window management APIs that may not be compatible with the latest versions of `pyglet`. If you encounter launch or display issues, please isolate the project inside a virtual environment using the versions provided in `requirements.txt`.
 
 ### Prerequisites
 Ensure you have Python 3.x installed on your machine.
