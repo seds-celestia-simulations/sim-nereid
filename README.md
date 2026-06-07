@@ -87,7 +87,7 @@ Ensure you have Python 3.x installed on your machine.
 
 ## Credits
 - Based on the initial project by [Aditya Melinkeri](https://github.com/AMVS24) - [SPH-Simulation](https://github.com/AMVS24/SPH-Simulation) developed at SEDS Celestia, BITS Goa.<br>
-- Refined and presented by [Aditya Melinkeri](https://github.com/AMVS24), [Harliv Singh](https://github.com/HARLIV-SINGH), and [Tanya Bahrani](https://github.com/tan-coding) for the final project demo.<br>
+- Refined and presented by [Aditya Melinkeri](https://github.com/AMVS24), [Harliv Singh](https://github.com/h-livv), and [Tanya Bahrani](https://github.com/tan-coding) for the final project demo.<br>
 
 ## References
 - [Coding Adventure: Simulating Fluids](https://www.youtube.com/watch?v=rSKMYc1CQHE) - An excellent implementation of SPH.
