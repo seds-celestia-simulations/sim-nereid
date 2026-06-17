@@ -55,8 +55,8 @@ Ensure you have Python 3.x installed on your machine.
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/HARLIV-SINGH/fluid-sim-SPH-SEDS.git
-   cd fluid-sim-SPH-SEDS
+   git clone https://github.com/h-livv/sim-fluid-sph.git
+   cd sim-fluid-sph
 
 2. Create and activate a virtual environment (Recommended):
    * Windows:
