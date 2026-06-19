@@ -1,6 +1,6 @@
-# Fluid Simulation using SPH
+# Nereid
 
-This repository contains a 3D fluid simulation built from scratch using the **Smoothed Particle Hydrodynamics (SPH)** technique.
+Nereid is a particle-based 3D fluid simulation built from scratch using the **Smoothed Particle Hydrodynamics (SPH)** technique.
 
 ---
 
