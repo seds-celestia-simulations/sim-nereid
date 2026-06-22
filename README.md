@@ -88,8 +88,9 @@ Nereid/
 
 ├── src/
 ├── docs/
-├── examples/
-└── legacy/
+├── legacy/
+├── content/
+└── README.md
 ```
 
 The repository contains multiple prototype implementations developed during the evolution of the project:
