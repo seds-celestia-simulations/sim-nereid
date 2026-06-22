@@ -1,6 +1,8 @@
 # Nereid
 
-Nereid is a particle-based 3D fluid simulation built from scratch using the **Smoothed Particle Hydrodynamics (SPH)** technique.
+Nereid is a particle-based continuum mechanics framework focused on **Smoothed Particle Hydrodynamics (SPH)** and particle-based numerical methods.
+
+The current implementation features a fully three-dimensional SPH solver built from first principles, including density estimation, pressure forces, artificial viscosity, spatial hashing, and Velocity Verlet integration.
 
 ---
 
@@ -8,86 +10,150 @@ Nereid is a particle-based 3D fluid simulation built from scratch using the **Sm
 
 <img width="216" height="384" alt="SPH_GIF" src="https://github.com/user-attachments/assets/ec2a6069-63c5-4404-a585-90ae83e4aa3d" /> <img width="600" height="384" alt="fluid_sim_15k - Trim" src="https://github.com/user-attachments/assets/d9c53b01-a626-4662-8f69-81bab90abd87" />
 
+---
+
+## Motivation
+
+Traditional computational fluid dynamics (CFD) approaches typically discretize space using fixed grids. Particle methods provide a mesh-free alternative in which fluid properties are carried directly by moving particles.
+
+Nereid explores these methods from first principles, with an emphasis on:
+
+* Numerical simulation
+* Computational physics
+* Scientific visualization
+* High-performance particle methods
+* Extensible simulation architecture
 
 ---
 
-## What is SPH?
+## Current Features
 
-**Smoothed Particle Hydrodynamics (SPH)** is a mesh-free, Lagrangian method used to simulate fluid flows. Instead of tracking fluid properties on a fixed spatial grid (Eulerian approach), SPH tracks physical properties such as mass, density, velocity, and pressure directly on moving particles.
+### Physics
 
-The fundamental principle of SPH is the **Smoothing Kernel** ($W$). The value of any physical property $A$ at a specific point $\mathbf{r}$ is interpolated by summing the contributions of neighboring particles weighted by this kernel function over a characteristic smoothing length $h$:
+* Three-dimensional SPH formulation
+* Density estimation using smoothing kernels
+* Pressure force computation
+* Artificial viscosity
+* Gravity and boundary interactions
 
-$$A(\mathbf{r}) \approx \sum_{j} m_j \frac{A_j}{\rho_j} W(\mathbf{r} - \mathbf{r}_j, h)$$
+### Numerical Methods
 
-### Mathematical Core
-The simulation solves the Navier-Stokes equations for fluid dynamics by breaking them down into three primary particle-particle interactions:
-1. **Density & Pressure:** Particle density $\rho_i$ is calculated using the smoothing kernel. Pressure $P_i$ is then derived using an equation of state (e.g., ideal gas law approximation) to generate repulsive forces that prevent fluid compression.
-2. **Viscosity:** A friction-like force acting between particles to simulate fluid thickness and damp internal velocities, modeled using a specialized viscosity smoothing kernel.
-3. **External Forces:** Gravity and rigid boundary collisions.
+* Velocity Verlet integration
+* Compact-support smoothing kernels
+* Structure-of-arrays particle storage
+* Vectorized force evaluation
+
+### Performance
+
+* Spatial hashing neighbour search
+* Grid-based particle partitioning
+* Localized neighbourhood queries
+* Reduced complexity relative to naive O(N²) approaches
+
+### Visualization & Output
+
+* Real-time OpenGL visualization
+* 3D particle rendering
+* Frame export pipeline
+* JSON simulation snapshots
 
 ---
 
-## How was it Implemented?
+## Simulation Pipeline
 
-The project is engineered to balance physical accuracy with computational performance. 
+```text
+Particle State
+      ↓
+Spatial Hashing
+      ↓
+Neighbour Search
+      ↓
+Density Estimation
+      ↓
+Pressure & Viscosity
+      ↓
+Force Accumulation
+      ↓
+Velocity Verlet Integration
+      ↓
+Updated Particle State
+```
 
-### Tech Stack
-* **Language:** Python
-* **Libraries:** NumPy, Pyglet
-
-### Architectural Details & Optimizations
-* **Spatial Hashing / Grid-Based Neighbor Search:** A naive neighbor lookup takes $O(N^2)$ time. To achieve real-time performance, we implemented a 3D uniform grid spatial partitioning system. Particles are mapped to grid cells of size $h$, reducing the neighbor lookup complexity to a localized $O(N)$ operations.
-* **Numerical Integration:** Uses the **Velocity Verlet** integration scheme for stable particle state updates across discrete time steps ($\Delta t$).
-* **Boundary Handling:** Implemented using reflective impulse forces combined with positional corrections to prevent particles from escaping the containment boundaries.
 ---
 
+## Repository Structure
+
+```text
+Nereid/
+
+├── src/
+├── docs/
+├── examples/
+└── legacy/
+```
+
+The repository contains multiple prototype implementations developed during the evolution of the project:
+
+* Naive SPH
+* Vectorized SPH
+* 3D SPH
+* Experimental Taichi backend
+
+These implementations serve both as references and as stepping stones toward a unified framework architecture.
+
 ---
 
-## Installation
+## Roadmap
 
-> [!WARNING]
-> **Pyglet Compatibility Note:** This simulation relies on specific window management APIs that may not be compatible with the latest versions of `pyglet`. If you encounter launch or display issues, please isolate the project inside a virtual environment using the versions provided in `requirements.txt`.
+### Phase I — Framework Consolidation
 
-### Prerequisites
-Ensure you have Python 3.x installed on your machine.
+* Modular solver architecture
+* Documentation overhaul
+* Validation suite
+* Codebase cleanup
 
-### Setup
+### Phase II — Performance
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/h-livv/sim-nereid.git
-   cd sim-nereid
+* GPU acceleration
+* Taichi backend
+* Larger particle counts
 
-2. Create and activate a virtual environment (Recommended):
-   * Windows:
-    ```bash
-    python -m venv venv
-    .\venv\Scripts\activate
-    ```
-    * macOS/Linux:
-   ```bash
-   python3 -m venv venv
-   source venv/bin/activate
-   ```
+### Phase III — Advanced SPH
 
-3. Install the dependencies:
-  ```bash
-   pip install -r requirements.txt
-  ```
+* WCSPH improvements
+* PCISPH
+* DFSPH
+* Improved boundary handling
 
-4. Run the simulation:
-  ```bash
-  python sph.py
-  ```
+### Phase IV — Extended Physics
 
-## Next steps
-* Clean code: Strip the code down to the core essential functions and implement TODOs.
-* GPU Acceleration: Implement parallel computing using libraries like Taichi.
-* Laminar flow: Develop laminar flow and explore applications.
+* Multi-phase flows
+* Granular materials
+* Solid-fluid interaction
+* Astrophysical SPH experiments
+
+---
+
+## Documentation
+
+* `docs/theory.md` — Mathematical foundations of SPH
+* `docs/architecture.md` — System architecture and design decisions
+* `docs/roadmap.md` — Development roadmap
+* `docs/history.md` — Evolution of the project
+
+---
 
 ## Credits
-- Based on the initial project by [Aditya Melinkeri](https://github.com/AMVS24) - [SPH-Simulation](https://github.com/AMVS24/SPH-Simulation) developed at SEDS Celestia, BITS Goa.<br>
-- Refined and presented by [Aditya Melinkeri](https://github.com/AMVS24), [Harliv Singh](https://github.com/h-livv), and [Tanya Bahrani](https://github.com/tan-coding) for the final project demo.<br>
+
+Based on the initial SPH project developed at SEDS Celestia, BITS Goa.
+
+Contributors:
+
+* Aditya Melinkeri
+* Harliv Singh
+* Tanya Bahrani
+
+---
 
 ## References
 - [Coding Adventure: Simulating Fluids](https://www.youtube.com/watch?v=rSKMYc1CQHE) - An excellent implementation of SPH.
