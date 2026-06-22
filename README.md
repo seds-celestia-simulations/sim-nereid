@@ -140,6 +140,7 @@ These implementations serve both as references and as stepping stones toward a u
 * `docs/architecture.md` — System architecture and design decisions
 * `docs/roadmap.md` — Development roadmap
 * `docs/history.md` — Evolution of the project
+* `docs/SPH_legacy_report` — Documentation of legacy versions
 
 ---
 
