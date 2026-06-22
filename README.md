@@ -1,6 +1,6 @@
 # Nereid
 
-Nereid is a particle-based continuum mechanics framework focused on **Smoothed Particle Hydrodynamics (SPH)** and particle-based numerical methods.
+Nereid is a particle-based framework focused on **Smoothed Particle Hydrodynamics (SPH)** and particle-based numerical methods.
 
 The current implementation features a fully three-dimensional SPH solver built from first principles, including density estimation, pressure forces, artificial viscosity, spatial hashing, and Velocity Verlet integration.
 
