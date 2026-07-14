@@ -58,7 +58,7 @@ class SPHSim:
         self.velocity_array += self.acceleration_array * dt  # Currently utilising Euler Integration
         self.position_array += self.velocity_array * dt
 
-Sim = SPHSim(7, 8000, 1,1, 10000)
+Sim = SPHSim(7, 8000, 1,1, 2000)
 
 
 class Profiler:

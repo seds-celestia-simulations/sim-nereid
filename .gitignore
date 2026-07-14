@@ -1,0 +1,53 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environment
+.venv/
+venv/
+
+# VS Code
+.vscode/
+
+# JetBrains
+.idea/
+
+# macOS
+.DS_Store
+
+# Linux
+*~
+
+# Build
+build/
+dist/
+*.egg-info/
+
+# Logs
+*.log
+
+# Screenshots
+data/screenshots/
+*.png
+
+# Videos
+data/videos/
+
+# Simulation output
+data/output/
+
+# Profiling
+*.prof
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Pytest
+.pytest_cache/
+
+# Mypy
+.mypy_cache/
+
+# Ruff
+.ruff_cache/

@@ -1,161 +1,206 @@
 # Nereid
 
-Nereid is a particle-based framework focused on **Smoothed Particle Hydrodynamics (SPH)** and particle-based numerical methods.
+A modern particle simulation framework built around **Smoothed Particle Hydrodynamics (SPH)**.
 
-The current implementation features a fully three-dimensional SPH solver built from first principles, including density estimation, pressure forces, artificial viscosity, spatial hashing, and Velocity Verlet integration.
+Nereid is designed as a research and development platform for particle-based numerical methods, emphasizing clean architecture, extensibility, and performance. The current implementation provides a CPU-based Weakly Compressible SPH (WCSPH) solver with real-time visualization and a modular framework intended to support future particle methods.
 
 ---
 
 ## Demonstration
 
-<img width="216" height="384" alt="SPH_GIF" src="https://github.com/user-attachments/assets/ec2a6069-63c5-4404-a585-90ae83e4aa3d" /> <img width="600" height="384" alt="fluid_sim_15k - Trim" src="https://github.com/user-attachments/assets/d9c53b01-a626-4662-8f69-81bab90abd87" />
+<img width="600" height="384" alt="fluid_sim" src="https://github.com/user-attachments/assets/d9c53b01-a626-4662-8f69-81bab90abd87" />
 
 ---
 
-## Motivation
+# Overview
 
-Traditional computational fluid dynamics (CFD) approaches typically discretize space using fixed grids. Particle methods provide a mesh-free alternative in which fluid properties are carried directly by moving particles.
+Smoothed Particle Hydrodynamics represents fluids using moving particles carrying physical quantities such as density, pressure, and velocity.
 
-Nereid explores these methods from first principles, with an emphasis on:
+Nereid explores these methods from first principles while providing a reusable software architecture for particle simulations.
 
-* Numerical simulation
-* Computational physics
-* Scientific visualization
-* High-performance particle methods
-* Extensible simulation architecture
+The project is organized around independent simulation subsystems:
 
----
+- Physics
+- Spatial acceleration
+- Numerical integration
+- Rendering
+- Diagnostics
 
-## Current Features
-
-### Physics
-
-* Three-dimensional SPH formulation
-* Density estimation using smoothing kernels
-* Pressure force computation
-* Artificial viscosity
-* Gravity and boundary interactions
-
-### Numerical Methods
-
-* Velocity Verlet integration
-* Compact-support smoothing kernels
-* Structure-of-arrays particle storage
-* Vectorized force evaluation
-
-### Performance
-
-* Spatial hashing neighbour search
-* Grid-based particle partitioning
-* Localized neighbourhood queries
-* Reduced complexity relative to naive O(N²) approaches
-
-### Visualization & Output
-
-* Real-time OpenGL visualization
-* 3D particle rendering
-* Frame export pipeline
-* JSON simulation snapshots
+rather than a single monolithic solver.
 
 ---
 
-## Simulation Pipeline
+# Current Features
 
-```text
+## Physics
+
+- Weakly Compressible SPH (WCSPH)
+- Density estimation
+- Pressure force computation
+- Artificial viscosity
+- Gravity
+- Boundary collisions
+
+## Numerical Methods
+
+- Explicit Euler integration
+- Compact-support smoothing kernels
+- Data-oriented particle storage (Structure of Arrays)
+- Fully vectorized particle interactions
+
+## Spatial Acceleration
+
+- Uniform spatial hash grid
+- Grid-based neighbour search
+- Local neighbourhood evaluation
+- Near-linear neighbour queries
+
+## Rendering
+
+- GPU-accelerated OpenGL renderer
+- GLSL shader pipeline
+- Circular particle rendering
+- Multiple visualization modes
+  - Solid
+  - Velocity
+  - Density
+
+## Diagnostics
+
+- Built-in frame profiler
+- Runtime statistics overlay
+- Screenshot capture
+- Pause / Resume
+- Simulation reset
+
+---
+
+# Architecture
+
+```
+                Simulation
+                     │
+      ┌──────────────┼──────────────┐
+      │              │              │
+  ParticleData   SpatialHash    Renderer
+      │              │              │
+ Parameters      Neighbour      Diagnostics
+      │            Search
+      │
+ Integrator
+```
+
+The framework follows a hybrid **Object-Oriented + Data-Oriented** design.
+
+Large particle datasets are stored in contiguous NumPy arrays for efficient vectorized computation, while higher-level systems encapsulate simulation logic into modular components.
+
+---
+
+# Simulation Pipeline
+
+```
 Particle State
-      ↓
-Spatial Hashing
-      ↓
+      │
+      ▼
+Spatial Hash Construction
+      │
+      ▼
 Neighbour Search
-      ↓
+      │
+      ▼
 Density Estimation
-      ↓
-Pressure & Viscosity
-      ↓
+      │
+      ▼
+Pressure Evaluation
+      │
+      ▼
 Force Accumulation
-      ↓
-Velocity Verlet Integration
-      ↓
-Updated Particle State
+      │
+      ▼
+Integration
+      │
+      ▼
+Rendering
 ```
 
 ---
 
-## Repository Structure
+# Repository Structure
 
-```text
-Nereid/
-
-├── src/
-├── docs/
-├── examples/
-└── legacy/
+```
+src/
+│
+├── core/
+│   ├── data.py
+│   ├── simulation.py
+│   └── integrators.py
+│
+├── physics/
+│   ├── kernel.py
+│   └── solver.py
+│
+├── spatial/
+│   └── spatial_hashing.py
+│
+├── rendering/
+│   └── renderer.py
+│
+├── diagnostics/
+│   └── profiler.py
+│
+└── main.py
 ```
 
-The repository contains multiple prototype implementations developed during the evolution of the project:
+---
 
-* Naive SPH
-* Vectorized SPH
-* 3D SPH
-* Experimental Taichi backend
+# Project Goals
 
-These implementations serve both as references and as stepping stones toward a unified framework architecture.
+Nereid is intended to evolve beyond a single SPH implementation into a general particle simulation framework.
+
+## Near Term
+
+- Leapfrog integration
+- Kernel abstraction
+- Multiple boundary models
+- Solver validation
+- Documentation
+
+## Performance
+
+- Numba acceleration
+- GPU compute backend
+- Improved neighbour search
+- Larger particle counts
+
+## Advanced SPH
+
+- Surface tension
+- XSPH correction
+- Adaptive timesteps
+- PCISPH
+- DFSPH
+
+## Long Term
+
+- Multi-phase fluids
+- Granular materials
+- Elastic solids
+- Astrophysical SPH
+- General particle-based numerical methods
 
 ---
 
-## Roadmap
+# References
 
-### Phase I — Framework Consolidation
-
-* Modular solver architecture
-* Documentation overhaul
-* Validation suite
-* Codebase cleanup
-
-### Phase II — Performance
-
-* GPU acceleration
-* Taichi backend
-* Larger particle counts
-
-### Phase III — Advanced SPH
-
-* WCSPH improvements
-* PCISPH
-* DFSPH
-* Improved boundary handling
-
-### Phase IV — Extended Physics
-
-* Multi-phase flows
-* Granular materials
-* Solid-fluid interaction
-* Astrophysical SPH experiments
-
----
-
-## Documentation
-
-* `docs/theory.md` — Mathematical foundations of SPH
-* `docs/architecture.md` — System architecture and design decisions
-* `docs/roadmap.md` — Development roadmap
-* `docs/history.md` — Evolution of the project
-* `docs/SPH_legacy_report` — Documentation of legacy versions
-
----
-
-## Credits
-
-Based on the initial SPH project developed at SEDS Celestia, BITS Goa.
-
-Contributors:
-
-* Aditya Melinkeri
-* Harliv Singh
-* Tanya Bahrani
-
----
-
-## References
 - [Coding Adventure: Simulating Fluids](https://www.youtube.com/watch?v=rSKMYc1CQHE) - An excellent implementation of SPH.
 - Müller, M., Charypar, D., & Gross, M. (2003). *Particle-Based Fluid Simulation for Interactive Applications*. [PDF](https://matthias-research.github.io/pages/publications/sca03.pdf)
+
+---
+
+# Credits
+
+Developed within **SEDS Celestia, BITS Goa**.
+
+Contributors
+
+- Harliv Singh

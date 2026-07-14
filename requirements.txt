@@ -1,4 +1,2 @@
-numpy
-
-#An older version to ensure compatibility
-pyglet==1.4.7
+numpy==2.5.1
+pyglet==2.1.15
