@@ -8,7 +8,7 @@ Nereid is designed as a research and development platform for particle-based num
 
 ## Demonstration
 
-<img width="600" height="384" alt="fluid_sim" src="https://github.com/user-attachments/assets/d9c53b01-a626-4662-8f69-81bab90abd87" />
+<img width="400" height="503" alt="nereid" src="https://github.com/user-attachments/assets/a0bf94f7-774d-4779-8363-6ea7865f8026" />
 
 ---
 
