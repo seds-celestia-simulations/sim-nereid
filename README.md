@@ -203,4 +203,4 @@ Developed within **SEDS Celestia, BITS Goa**.
 
 Contributors
 
-- Harliv Singh
+- [Harliv Singh](https://github.com/h-livv)
