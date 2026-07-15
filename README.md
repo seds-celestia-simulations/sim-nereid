@@ -140,7 +140,7 @@ src/
 │   └── solver.py
 │
 ├── spatial/
-│   └── spatial_hashing.py
+│   └── spatial_data.py
 │
 ├── rendering/
 │   └── renderer.py
