@@ -1,8 +1,6 @@
 # Nereid
 
-A modern particle simulation framework built around **Smoothed Particle Hydrodynamics (SPH)**.
-
-Nereid is designed as a research and development platform for particle-based numerical methods, emphasizing clean architecture, extensibility, and performance. The current implementation provides a CPU-based Weakly Compressible SPH (WCSPH) solver with real-time visualization and a modular framework intended to support future particle methods.
+**Nereid is a computational laboratory for particle-based simulation, high-performance computing, and Smoothed Particle Hydrodynamics.**
 
 ---
 
@@ -16,7 +14,7 @@ Nereid is designed as a research and development platform for particle-based num
 
 Smoothed Particle Hydrodynamics represents fluids using moving particles carrying physical quantities such as density, pressure, and velocity.
 
-Nereid explores these methods from first principles while providing a reusable software architecture for particle simulations.
+Nereid is designed to investigate particle-based numerical methods from first principles, with particular emphasis on algorithmic design, computational performance, and modular simulation architecture.
 
 The project is organized around independent simulation subsystems:
 
@@ -30,7 +28,7 @@ rather than a single monolithic solver.
 
 ---
 
-# Current Features
+# Implemented Concepts
 
 ## Physics
 
@@ -153,40 +151,26 @@ src/
 
 ---
 
-# Project Goals
+# Research Directions
 
-Nereid is intended to evolve beyond a single SPH implementation into a general particle simulation framework.
-
-## Near Term
-
-- Leapfrog integration
-- Kernel abstraction
-- Multiple boundary models
-- Solver validation
-- Documentation
-
-## Performance
-
-- Numba acceleration
-- GPU compute backend
-- Improved neighbour search
-- Larger particle counts
-
-## Advanced SPH
-
-- Surface tension
-- XSPH correction
-- Adaptive timesteps
+**Particle Methods**
+- WCSPH improvements
 - PCISPH
 - DFSPH
+- Position-Based Fluids
 
-## Long Term
+**High-Performance Computing**
+- Numba
+- GPU compute
+- Spatial data structures
+- Parallel algorithms
 
-- Multi-phase fluids
-- Granular materials
+**Physical Systems**
+- Free-surface flows
+- Multiphase fluids
+- Granular media
 - Elastic solids
 - Astrophysical SPH
-- General particle-based numerical methods
 
 ---
 
