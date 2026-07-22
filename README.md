@@ -1,6 +1,6 @@
 # Nereid
 
-**Nereid is a computational laboratory for particle-based simulation, high-performance computing, and Smoothed Particle Hydrodynamics.**
+**An experimental environment for studying particle-based numerical methods, with a focus on Smoothed Particle Hydrodynamics and high-performance simulation.**
 
 ---
 
@@ -30,46 +30,31 @@ rather than a single monolithic solver.
 
 # Implemented Concepts
 
-## Physics
+**Physics**
 
-- Weakly Compressible SPH (WCSPH)
-- Density estimation
-- Pressure force computation
+- Weakly Compressible SPH
+- Pressure forces
 - Artificial viscosity
-- Gravity
-- Boundary collisions
+- Boundary handling
 
-## Numerical Methods
+**Numerics**
 
-- Explicit Euler integration
-- Compact-support smoothing kernels
-- Data-oriented particle storage (Structure of Arrays)
-- Fully vectorized particle interactions
+- Explicit Euler
+- Vectorized particle interactions
+- Compact-support kernels
 
-## Spatial Acceleration
+**Performance**
 
-- Uniform spatial hash grid
-- Grid-based neighbour search
-- Local neighbourhood evaluation
-- Near-linear neighbour queries
+- Uniform spatial hash
+- Neighbor search
+- Structure-of-Arrays storage
+- OpenGL rendering
 
-## Rendering
+**Diagnostics**
 
-- GPU-accelerated OpenGL renderer
-- GLSL shader pipeline
-- Circular particle rendering
+- Runtime profiling
+- Statistics overlay
 - Multiple visualization modes
-  - Solid
-  - Velocity
-  - Density
-
-## Diagnostics
-
-- Built-in frame profiler
-- Runtime statistics overlay
-- Screenshot capture
-- Pause / Resume
-- Simulation reset
 
 ---
 
@@ -88,84 +73,26 @@ rather than a single monolithic solver.
  Integrator
 ```
 
-The framework follows a hybrid **Object-Oriented + Data-Oriented** design.
-
-Large particle datasets are stored in contiguous NumPy arrays for efficient vectorized computation, while higher-level systems encapsulate simulation logic into modular components.
-
 ---
 
-# Simulation Pipeline
-
-```
-Particle State
-      │
-      ▼
-Spatial Hash Construction
-      │
-      ▼
-Neighbour Search
-      │
-      ▼
-Density Estimation
-      │
-      ▼
-Pressure Evaluation
-      │
-      ▼
-Force Accumulation
-      │
-      ▼
-Integration
-      │
-      ▼
-Rendering
-```
-
----
-
-# Repository Structure
-
-```
-src/
-│
-├── core/
-│   ├── data.py
-│   ├── simulation.py
-│   └── integrators.py
-│
-├── physics/
-│   ├── kernel.py
-│   └── solver.py
-│
-├── spatial/
-│   └── spatial_data.py
-│
-├── rendering/
-│   └── renderer.py
-│
-├── diagnostics/
-│   └── profiler.py
-│
-└── main.py
-```
-
----
-
-# Research Directions
+# Future Directions
 
 **Particle Methods**
+
 - WCSPH improvements
 - PCISPH
 - DFSPH
 - Position-Based Fluids
 
 **High-Performance Computing**
+
 - Numba
 - GPU compute
 - Spatial data structures
 - Parallel algorithms
 
 **Physical Systems**
+
 - Free-surface flows
 - Multiphase fluids
 - Granular media
